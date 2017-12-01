@@ -15,7 +15,7 @@ It's pure JavaScript and dependency free, so it can be used with React or any ot
 
 In FLUX, data is managed in a centralized data store, and there's a dispatcher that sends messages (or actions) to it,
 causing the store to be updated. The view layer subscribes to the store and updates when the store changes. To implement
-these scheme, using apothecary consists of the following elements:
+this scheme, using apothecary consists of the following elements:
 
 1. Initializing the store with an initial state
 2. Actions that mutate the state when dispatched to the store
