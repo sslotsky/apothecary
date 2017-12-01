@@ -1,0 +1,21 @@
+{
+  "name": "apothecary",
+  "version": "0.1.0",
+  "description": "Your local friendly storekeeper",
+  "main": "dist/index.js",
+  "author": "Sam Slotsky",
+  "license": "MIT",
+  "scripts": {
+    "compile": "rm -rf dist && mkdir dist && babel -d dist/ src/",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-jest": "^21.2.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "jest": "^21.2.1",
+    "regenerator-runtime": "^0.11.0"
+  }
+}

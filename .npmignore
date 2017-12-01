@@ -1,0 +1,7 @@
+.babelrc
+src/
+test/
+.eslintrc
+.travis.yml
+.gitignore
+
