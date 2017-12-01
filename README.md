@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/sslotsky/apothecary.svg?branch=master)](https://travis-ci.org/sslotsky/apothecary)
+
 # Apothecary
 
 Your local, friendly storekeeper. Apothecary is:
