@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "compile": "rm -rf dist && mkdir dist && babel -d dist/ src/",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

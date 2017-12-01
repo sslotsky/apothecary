@@ -1,6 +1,7 @@
 .babelrc
 src/
 test/
+coverage/
 .eslintrc
 .travis.yml
 .gitignore
