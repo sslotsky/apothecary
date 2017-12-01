@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/sslotsky/apothecary.svg?branch=master)](https://travis-ci.org/sslotsky/apothecary)
+[![codecov](https://codecov.io/gh/sslotsky/apothecary/branch/master/graph/badge.svg)](https://codecov.io/gh/sslotsky/apothecary)
 
 # Apothecary
 
