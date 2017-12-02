@@ -151,4 +151,4 @@ const CounterApp = tunnel(state => ({ n: state.n }), {
 export default () => <Bridge store={store}><CounterApp /></Bridge>;
 ```
 
-See [the react-apothecary repo](#tbd) for further documentation.
+See [the react-apothecary repo](https://github.com/sslotsky/react-apothecary) for further documentation.
