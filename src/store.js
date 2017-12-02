@@ -17,6 +17,7 @@ export default function initialize(initialState) {
 
   return {
     subscribe: listener => listeners.push(listener),
+    unsubscribe: listener => listeners.splice(listeners.indexOf(listener), 1),
     getState: () => state,
     dispatch
   };
