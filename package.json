@@ -1,6 +1,6 @@
 {
   "name": "apothecary",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Your local friendly storekeeper",
   "main": "dist/index.js",
   "author": "Sam Slotsky",
