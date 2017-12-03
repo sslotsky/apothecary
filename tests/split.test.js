@@ -9,3 +9,12 @@ test('operates on a subtree', () => {
 
   expect(state.pagination.page).toBe(2);
 });
+
+test('it fills in missing keys along the path', () => {
+  const store = initialize({});
+  const next = split((page = 7) => page + 1, 'pagination', 'page');
+
+  const state = store.dispatch(next);
+
+  expect(state.pagination.page).toBe(8);
+});
