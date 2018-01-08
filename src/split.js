@@ -16,4 +16,15 @@ const drill = (state, action, keys) => {
 
 export default function split(action, ...keys) {
   return state => drill(state, action, keys);
-};
+}
+
+export function splits(...keys) {
+  return actions =>
+    Object.entries(actions).reduce(
+      (all, [name, f]) => ({
+        ...all,
+        [name]: split(f, ...keys)
+      }),
+      {}
+    );
+}
