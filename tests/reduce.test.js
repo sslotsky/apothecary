@@ -25,4 +25,16 @@ describe("reductive", () => {
     const state = store.dispatch(inc);
     expect(state.n).toBe(2);
   });
+
+  it("invokes the provided callback appropriately", () => {
+    const initialState = { n: 1 };
+    const endState = { n: 2 };
+    const callback = jest.fn();
+    const store = initialize(initialState, reductive(callback));
+    const payload = { type: "increment" };
+    const inc = () => payload;
+    const actions = reduce(() => endState)({ inc });
+    const state = store.dispatch(actions.inc());
+    expect(callback).toHaveBeenCalledWith(payload, initialState, endState);
+  });
 });
