@@ -1,4 +1,4 @@
-const drill = (state, action, keys) => {
+export const drill = (state, action, keys) => {
   const key = keys[0];
   const substate = state[key];
 
