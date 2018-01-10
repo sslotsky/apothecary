@@ -1,20 +1,28 @@
+import { drill } from "./split";
+
 class Reduced {
-  constructor(reducer, data) {
+  constructor(reducer, data, ...keys) {
     this.data = data;
     this.reducer = reducer;
+    this.keys = keys;
   }
 
   reduce(store) {
-    return () => this.reducer(store.getState(), this.data);
+    return () =>
+      drill(
+        store.getState(),
+        state => this.reducer(state, this.data),
+        this.keys
+      );
   }
 }
 
-export function reduce(reducer) {
+export function reduce(reducer, ...keys) {
   return actions =>
     Object.entries(actions).reduce(
       (reduced, [name, action]) => ({
         ...reduced,
-        [name]: (...args) => new Reduced(reducer, action(...args))
+        [name]: (...args) => new Reduced(reducer, action(...args), ...keys)
       }),
       {}
     );

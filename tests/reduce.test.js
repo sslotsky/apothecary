@@ -3,20 +3,20 @@ import initialize from "../src/store";
 
 describe("reductive", () => {
   it("allows for flux style actions", () => {
-    const store = initialize({ n: 1 }, reductive());
-    const counter = (state, action) => {
+    const store = initialize({ counter: { n: 1 } }, reductive());
+    const counter = (n, action) => {
       if (action.type === "increment") {
-        return { ...state, n: state.n + 1 };
+        return n + 1;
       }
 
-      return state;
+      return n;
     };
 
     const inc = () => ({ type: "increment" });
-    const actions = reduce(counter)({ inc });
+    const actions = reduce(counter, "counter", "n")({ inc });
 
     const state = store.dispatch(actions.inc());
-    expect(state.n).toBe(2);
+    expect(state.counter.n).toBe(2);
   });
 
   it("passes along regular actions", () => {

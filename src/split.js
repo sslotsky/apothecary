@@ -1,4 +1,8 @@
 export const drill = (state, action, keys) => {
+  if (!keys.length) {
+    return action(state);
+  }
+
   const key = keys[0];
   const substate = state[key];
 
