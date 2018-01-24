@@ -131,9 +131,9 @@ import { Bridge, tunnel } from "react-apothecary";
 
 const store = initialize({ n: 1 });
 
-const increment = split(n => n + 1, "n");
+const increment = () => split(n => n + 1, "n");
 
-const decrement = split(n => n - 1, "n");
+const decrement = () => split(n => n - 1, "n");
 
 function Counter({ n, inc, dec }) {
   return (
