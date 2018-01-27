@@ -13,12 +13,10 @@ It's pure JavaScript and dependency free, so it can be used with React or any ot
 
 ## Usage
 
-In Flux, data is managed in a centralized data store, and there's a dispatcher that sends messages (or actions) to it,
-causing the store to be updated. The view layer subscribes to the store and updates when the store changes. To implement
-this scheme, using apothecary consists of the following elements:
+In Flux, data is managed in a centralized data store, and there's a dispatcher that sends messages (usually called actions) to it, causing the store to be updated. The view layer subscribes to the store and updates when the store changes. To implement this scheme, using apothecary consists of the following elements:
 
 1. Initializing the store with an initial state
-2. Actions that mutate the state when dispatched to the store
+2. Mutators that mutate the state when dispatched to the store
 3. A way to subscribe to the updates that take place in the store
 
 These are all described in turn below.
@@ -37,7 +35,8 @@ const store = initialize(initialState)
 
 ### Mutators
 
-A mutator is a function that describes a change to our application state. It's usually applied as a result of a user action.
+A mutator is a function that describes a change to our application state. It's usually applied as a result of a user 
+.
 In apothecary, a mutator is just a function that takes the current state and returns the new state. Dispatching
 that mutator to the store will cause the store to update. Example:
 
