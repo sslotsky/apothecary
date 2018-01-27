@@ -7,13 +7,13 @@ Your local, friendly storekeeper. Apothecary is:
 
 * Like redux, with less boilerplate
 * What they call a "predictable state container"
-* An implementation of FLUX
+* Similar to Flux/Redux, but without action types and reducers
 
 It's pure JavaScript and dependency free, so it can be used with React or any other JS UI tools you prefer.
 
 ## Usage
 
-In FLUX, data is managed in a centralized data store, and there's a dispatcher that sends messages (or actions) to it,
+In Flux, data is managed in a centralized data store, and there's a dispatcher that sends messages (or actions) to it,
 causing the store to be updated. The view layer subscribes to the store and updates when the store changes. To implement
 this scheme, using apothecary consists of the following elements:
 
@@ -35,11 +35,11 @@ const initialState = { n: 1 }
 const store = initialize(initialState)
 ```
 
-### Actions
+### Mutators
 
-An action is a function that causes a change to our application state. It's usually caused by a user action.
-In apothecary, an action is just a function that takes the current state and returns the new state. Dispatching
-that action to the store will cause the store to update. Example:
+A mutator is a function that describes a change to our application state. It's usually applied as a result of a user action.
+In apothecary, a mutator is just a function that takes the current state and returns the new state. Dispatching
+that mutator to the store will cause the store to update. Example:
 
 ```javascript
 const increment = state => ({ ...state, n: state.n + 1 })
@@ -54,10 +54,12 @@ This sends the `increment` message to the store which causes the mutation. Assum
 const { n } = store.getState()    // 2
 ```
 
-#### Async Actions
+Conceptually, a mutator takes the ideas of actions and reducers in Redux and combines them into a single, simple abstraction.
 
-Some actions will need to be asynchronous, like submitting form data to a server. You can use the `jam` function to
-make your actions asynchronous. Here's how you might use it:
+#### Async Mutators
+
+Some mutators will need to be asynchronous, like submitting form data to a server. You can use the `jam` function to
+make your mutators asynchronous. Here's how you might use it:
 
 ```javascript
 import { initialize, jam } from 'apothecary'
@@ -75,12 +77,12 @@ store.dispatch(incrementAsync).then(() =>
   ...
 ```
 
-Notice in the last line above: when we dispatch an async action, it returns a promise that we could chain to pop up
+Notice in the last line above: when we dispatch an async mutator, it returns a promise that we could chain to pop up
 a toast notification or something similar.
 
-#### Splitting Actions
+#### Splitting Mutators
 
-If your state tree gets fairly deep, it's much easier to define an action that only works on a small subtree, or even
+If your state tree gets fairly deep, it's much easier to define a mutator that only works on a small subtree, or even
 a leaf, of the application state. If you're using a plain JavaScript object to represent your state, you can do that by
 drilling into the application state with the `split` function. Simple example:
 
@@ -116,12 +118,12 @@ componentWillMount() {
 }
 ```
 
-Now this component will be updated every time an action is dispatched to the store.
+Now this component will be updated every time a mutator is dispatched to the store.
 
 #### UI Bindings
 
 If you are using React, you can download `react-apothecary` to bind to the UI layer. This manages subscriptions to
-the store and provides a mechanism to easily inject state and actions into your components, very similar to how it's
+the store and provides a mechanism to easily inject state and mutators into your components, very similar to how it's
 done in `react-redux`. Here's a simple and complete example:
 
 ```javascript
@@ -149,6 +151,22 @@ const CounterApp = tunnel(state => ({ n: state.n }), {
 })(Counter);
 
 export default () => <Bridge store={store}><CounterApp /></Bridge>;
+```
+
+Note the subtle difference between the mutators shown here and the ones that we've seen:
+
+```javascript
+// regular mutator
+const increment = split(n => n + 1, "n");
+
+// higher order mutator, or "action creator"
+const increment = () => split(n => n + 1, "n");
+```
+
+With `react-apothecary` you define functions that _return_ mutators. These are like action creators in redux. This is needed so that they can accept arguments. e.g.
+
+```javascript
+const updateComment = text => split(() => text, "someFormState", "comment");
 ```
 
 See [the react-apothecary repo](https://github.com/sslotsky/react-apothecary) for further documentation.
